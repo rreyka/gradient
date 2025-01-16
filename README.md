@@ -1,157 +1,157 @@
-# Gradient Network 挂机脚本保姆级教程
+# Gradient Network Bot - Comprehensive Tutorial
 
-> 👨‍💻 开发者：小林 (@yoyomyoyoa)
+> 👨‍💻 Developer: Xiaolin (@yoyomyoyoa)
 
-## 🌟 这是什么？
+## 🌟 What is this?
 
-这是一个帮助你自动挂机赚取 Gradient Network 积分的工具。它可以：
-- 自动登录账号
-- 保持在线状态
-- 24小时挂机运行
-- 支持代理IP
+This is a tool that helps you automate earning points on Gradient Network. It can:
+- Automatically log in to your account
+- Maintain online status
+- Run 24/7
+- Support proxy IPs
 
-## 🎯 准备工作
+## 🎯 Preparation
 
-### 1. 注册 Gradient Network 账号
-- 点击这里注册：[Gradient Network 注册](https://app.gradient.network/signup?code=VV3TZE)
-- 记住你的邮箱和密码，后面需要用到
+### 1. Register a Gradient Network Account
+- Click here to register: [Gradient Network Signup](https://app.gradient.network/signup?code=VV3TZE)
+- Remember your email and password as you’ll need them later.
 
-### 2. 购买代理（强烈推荐）
-1. 访问 [Proxy-Cheap](https://app.proxy-cheap.com/r/puD3oz)
-2. 注册并登录
-3. 选择 Static Residential 类型的代理
-4. 购买后，你会得到类似这样的代理地址：
+### 2. Purchase Proxy (Highly Recommended)
+1. Visit [Proxy-Cheap](https://app.proxy-cheap.com/r/puD3oz)
+2. Register and log in
+3. Select the Static Residential type of proxy
+4. After purchase, you will get a proxy address similar to this:
    ```
-   socks5://用户名:密码@代理地址:端口
+   socks5://username:password@proxy_address:port
    ```
 
-### 3. 准备服务器
-- 推荐使用 Ubuntu 系统的 VPS
-- 内存：1GB 及以上
-- 建议使用 [Vultr](https://www.vultr.com/) 或 [DigitalOcean](https://www.digitalocean.com/)
+### 3. Prepare a Server
+- Recommended OS: Ubuntu VPS
+- Memory: 1GB or more
+- Suggested providers: [Vultr](https://www.vultr.com/) or [DigitalOcean](https://www.digitalocean.com/)
 
-## 📝 安装步骤
+## 📝 Installation Steps
 
-### 第一步：连接到服务器
+### Step 1: Connect to Your Server
 
-#### Windows 用户：
-1. 下载并安装 [PuTTY](https://www.putty.org/)
-2. 打开 PuTTY
-3. 输入你的服务器 IP
-4. 点击 "Open"
-5. 输入用户名（通常是 root）和密码
+#### For Windows Users:
+1. Download and install [PuTTY](https://www.putty.org/)
+2. Open PuTTY
+3. Enter your server’s IP
+4. Click "Open"
+5. Enter your username (usually `root`) and password
 
-#### Mac/Linux 用户：
-1. 打开终端
-2. 输入：`ssh root@你的服务器IP`
-3. 输入密码
+#### For Mac/Linux Users:
+1. Open the terminal
+2. Type: `ssh root@your_server_ip`
+3. Enter the password
 
-### 第二步：安装必要软件
+### Step 2: Install Necessary Software
 
-复制以下命令，在服务器终端中运行：
+Copy the following commands and run them in the server terminal:
 ```bash
-# 更新系统
+# Update system
 sudo apt update && sudo apt upgrade -y
 
-# 安装必要工具
+# Install necessary tools
 sudo apt install -y curl wget git screen
 
-# 安装 Chrome 依赖
+# Install Chrome dependencies
 sudo apt install -y fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 libcups2 libdbus-1-3 libdrm2 libexpat1 libgbm1 libglib2.0-0 libnspr4 libnss3 libpango-1.0-0 libx11-6 libxcb1 libxcomposite1 libxdamage1 libxext6 libxfixes3 libxkbcommon0 libxrandr2 xdg-utils
 
-# 下载并安装 Chrome
+# Download and install Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
-# 安装 Docker
+# Install Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 
-# 验证安装
+# Verify installation
 google-chrome --version
 docker --version
 ```
 
-### 第三步：下载并运行程序
+### Step 3: Download and Run the Program
 
-1. 下载程序：
+1. Download the program:
 ```bash
-# 克隆代码
+# Clone the repository
 git clone https://github.com/mumumusf/gradient-network-bot.git
 cd gradient-network-bot
 ```
 
-2. 创建 screen 会话（保证程序不会因为断开 SSH 而停止）：
+2. Create a screen session (to ensure the program continues running even if SSH disconnects):
 ```bash
 screen -S gradient-bot
 ```
 
-3. 构建并运行 Docker 容器（替换下面的信息为你自己的）：
+3. Build and run the Docker container (replace the placeholders with your details):
 ```bash
-# 构建 Docker 镜像
+# Build Docker image
 sudo docker build . -t gradient-bot .
 
-# 运行容器
-sudo docker run -d --name gradient-bot -e APP_USER=你的Gradient邮箱 -e APP_PASS=你的Gradient密码 -e PROXY=socks5://代理用户名:代理密码@代理地址:端口 -e DEBUG=true --restart always gradient-bot
+# Run the container
+sudo docker run -d --name gradient-bot -e APP_USER=your_gradient_email -e APP_PASS=your_gradient_password -e PROXY=socks5://proxy_username:proxy_password@proxy_address:port -e DEBUG=true --restart always gradient-bot
 ```
 
-4. 查看运行日志：
+4. View runtime logs:
 ```bash
 sudo docker logs -f gradient-bot
 ```
 
-5. 按 `Ctrl + A` 然后按 `D` 来保持程序在后台运行
+5. Press `Ctrl + A`, then `D` to keep the program running in the background.
 
-## 🔍 如何检查程序是否正常运行？
+## 🔍 How to Check if the Program is Running Properly
 
-1. 重新连接到程序界面：
+1. Reconnect to the program interface:
 ```bash
 screen -r gradient-bot
 ```
 
-2. 检查运行状态：
+2. Check the running status:
 ```bash
 docker ps
 ```
-如果看到 `gradient-bot` 状态是 `Up`，说明程序正在运行
+If you see the `gradient-bot` container status as `Up`, the program is running properly.
 
-3. 查看最新日志：
+3. View the latest logs:
 ```bash
 sudo docker logs -f gradient-bot
 ```
 
-## ❓ 常见问题解答
+## ❓ FAQ
 
-### 1. 如何判断是否正常运行？
-- 运行 `docker ps` 能看到容器在线
-- 日志中没有红色报错信息
-- 登录网站后积分有增长
+### 1. How to know if it’s running correctly?
+- Running `docker ps` shows the container is online
+- There are no red error messages in the logs
+- Points are increasing on the website after logging in
 
-### 2. 代理在哪里买？
-推荐使用 [Proxy-Cheap](https://app.proxy-cheap.com/r/ksvW8Z)：
-- 选择 Static Residential 类型
-- 稳定性好，价格实惠
-- 支持多种支付方式
+### 2. Where to buy proxies?
+Recommended: [Proxy-Cheap](https://app.proxy-cheap.com/r/ksvW8Z):
+- Choose Static Residential type
+- Good stability and affordable prices
+- Multiple payment methods supported
 
-### 3. 遇到问题怎么办？
-- 检查网络是否正常
-- 确认账号密码是否正确
-- 查看运行日志寻找错误信息
-- 加入我们的交流群寻求帮助
+### 3. What should I do if I encounter issues?
+- Check if your network is working
+- Ensure your account credentials are correct
+- View the runtime logs to identify errors
+- Join our group chat for assistance
 
-## 📱 联系方式
+## 📱 Contact
 
-- 开发者：小林
-- Twitter：[@yoyomyoyoa](https://twitter.com/yoyomyoyoa)
+- Developer: Xiaolin
+- Twitter: [@yoyomyoyoa](https://twitter.com/yoyomyoyoa)
 
-## ⚠️ 注意事项
+## ⚠️ Notes
 
-1. 请使用可靠的代理服务
-2. 定期检查程序运行状态
-3. 保持服务器稳定在线
-4. 本项目仅供学习使用
-5. 停止并删除旧容器
-   docker stop gradient-bot1
-   docker rm gradient-bot1
-
-
+1. Use reliable proxy services
+2. Regularly check the program’s running status
+3. Ensure the server remains stable and online
+4. This project is for educational purposes only
+5. Stop and remove old containers:
+   ```bash
+   docker stop gradient-bot
+   docker rm gradient-bot
+   ```
