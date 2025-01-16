@@ -77,8 +77,8 @@ docker --version
 1. Download the program:
 ```bash
 # Clone the repository
-git clone https://github.com/mumumusf/gradient-network-bot.git
-cd gradient-network-bot
+git clone https://github.com/rreyka/gradient
+cd gradient
 ```
 
 2. Create a screen session (to ensure the program continues running even if SSH disconnects):
