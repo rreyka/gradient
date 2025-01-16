@@ -89,10 +89,15 @@ screen -S gradient-bot
 3. Build and run the Docker container (replace the placeholders with your details):
 ```bash
 # Build Docker image
-sudo docker build . -t gradient-bot .
+sudo docker build . -t gradient-bot
 
 # Run the container
-sudo docker run -d --name gradient-bot -e APP_USER=your_gradient_email -e APP_PASS=your_gradient_password -e PROXY=socks5://proxy_username:proxy_password@proxy_address:port -e DEBUG=true --restart always gradient-bot
+sudo docker run --rm -it --name gradient-bot \
+  -e APP_USER=gradient_email \
+  -e APP_PASS='gradient_password' \
+  -e DEBUG=true \
+  gradient-bot
+
 ```
 
 4. View runtime logs:
